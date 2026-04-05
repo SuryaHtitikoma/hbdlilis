@@ -46,15 +46,53 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   autoRotate();
 
-  // --- 3. ROTASI MOUSE ---
-  document.addEventListener("mousemove", (e) => {
+  // // --- 3. ROTASI MOUSE ---
+  // document.addEventListener("mousemove", (e) => {
+  //   if (animationTriggered) return;
+
+  //   isMouseMoving = true;
+  //   clearTimeout(mouseTimeout);
+
+  //   const dx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+  //   const dy = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+
+  //   const rotateY = dx * 180;
+  //   const rotateX = -dy * 180;
+
+  //   if (container.style.display !== "none") {
+  //     cube.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  //     idleRotationX = rotateX;
+  //     idleRotationY = rotateY;
+  //   }
+
+  //   mouseTimeout = setTimeout(() => {
+  //     isMouseMoving = false;
+  //   }, 200);
+  //   // Event untuk PC (Mouse)
+  //   document.addEventListener("mousemove", (e) => {
+  //     handleRotation(e.clientX, e.clientY);
+  //   });
+
+  //   // Event untuk HP (Touch)
+  //   document.addEventListener(
+  //     "touchmove",
+  //     (e) => {
+  //       // Ambil koordinat dari sentuhan jari pertama
+  //       handleRotation(e.touches[0].clientX, e.touches[0].clientY);
+  //     },
+  //     { passive: true },
+  //   );
+  // });
+
+  // --- 3. ROTASI MOUSE & TOUCH (MOBILE) ---
+  function handleRotation(clientX, clientY) {
     if (animationTriggered) return;
 
     isMouseMoving = true;
     clearTimeout(mouseTimeout);
 
-    const dx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-    const dy = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+    const dx = (clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+    const dy = (clientY - window.innerHeight / 2) / (window.innerHeight / 2);
 
     const rotateY = dx * 180;
     const rotateX = -dy * 180;
@@ -68,21 +106,21 @@ document.addEventListener("DOMContentLoaded", () => {
     mouseTimeout = setTimeout(() => {
       isMouseMoving = false;
     }, 200);
-    // Event untuk PC (Mouse)
-    document.addEventListener("mousemove", (e) => {
-      handleRotation(e.clientX, e.clientY);
-    });
+  }
 
-    // Event untuk HP (Touch)
-    document.addEventListener(
-      "touchmove",
-      (e) => {
-        // Ambil koordinat dari sentuhan jari pertama
-        handleRotation(e.touches[0].clientX, e.touches[0].clientY);
-      },
-      { passive: true },
-    );
+  // Event untuk PC (Mouse)
+  document.addEventListener("mousemove", (e) => {
+    handleRotation(e.clientX, e.clientY);
   });
+
+  // Event untuk HP (Touch)
+  document.addEventListener(
+    "touchmove",
+    (e) => {
+      handleRotation(e.touches[0].clientX, e.touches[0].clientY);
+    },
+    { passive: true },
+  );
 
   // --- 4. ANIMASI CINEMATIC HOLLOW PURPLE DENGAN AUDIO SYNC ---
   cube.addEventListener("click", () => {
