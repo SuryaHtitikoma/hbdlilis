@@ -1,0 +1,410 @@
+/* --- RESET & DASAR --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Perbaikan typo: box-box-sizing */
+}
+
+body {
+  background: #0d1117; /* Biru gelap hampir hitam */
+  color: white;
+  font-family: "Inter", sans-serif;
+  overflow: hidden; /* Mencegah scrollbar */
+}
+
+/* --- TEMA GOJO SATORU --- */
+.gojo-theme {
+  background: radial-gradient(
+    circle,
+    rgba(16, 21, 30, 1) 0%,
+    rgba(13, 17, 23, 1) 70%
+  );
+}
+
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    rgba(65, 105, 225, 0.05),
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.main-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+/* --- KUBUS INTERAKTIF 3D (PRISON REALM) --- */
+#cube-container {
+  perspective: 1000px;
+  width: 200px;
+  height: 200px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+#cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  pointer-events: auto;
+}
+
+.cube-face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid #a6d0ff;
+  background-size: cover;
+  background-position: center;
+  box-shadow:
+    inset 0 0 20px rgba(88, 166, 255, 0.5),
+    0 0 15px rgba(88, 166, 255, 0.3);
+  pointer-events: none;
+  /* Animasi mulus saat meledak */
+  transition:
+    transform 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67),
+    opacity 1s ease-out;
+  will-change: transform, opacity;
+}
+
+/* Koordinat kubus */
+.front {
+  transform: rotateY(0deg) translateZ(100px);
+}
+.back {
+  transform: rotateY(180deg) translateZ(100px);
+}
+.right {
+  transform: rotateY(90deg) translateZ(100px);
+}
+.left {
+  transform: rotateY(-90deg) translateZ(100px);
+}
+.top {
+  transform: rotateX(90deg) translateZ(100px);
+}
+.bottom {
+  transform: rotateX(-90deg) translateZ(100px);
+}
+
+/* --- KARTU ULANG TAHUN --- */
+.birthday-card {
+  /* position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgb(255, 255, 255); /* Latar belakang putih cerah */
+  /* border: 8px solid #58a6ff; /* Bingkai biru */
+  /* padding: 30px; /* Padding lebih proporsional */
+  /* border-radius: 30px; Sudut lebih membulat (fancy) */
+  /* box-shadow: 0 0 50px rgba(88, 166, 255, 0.5); Glowing biru */
+  /* transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
+  /* opacity: 0;
+  z-index: 1000;
+  width: 90%;
+  max-width: 800px; Beri ruang lebih untuk layout side-by-side */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+
+  background: #ffffff; /* Putih Cerah */
+  border: 6px solid #58a6ff;
+  border-radius: 25px;
+  padding: 25px;
+
+  width: 90%;
+  max-width: 750px;
+  max-height: 85vh; /* Biar gak luber keluar layar HP */
+  overflow-y: auto; /* Bisa di-scroll kalau teks kepanjangan */
+
+  box-shadow: 0 0 40px rgba(88, 166, 255, 0.4);
+  z-index: 2000; /* Pastikan di atas SEMUA efek Gojo */
+
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.birthday-card.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.birthday-card.hidden {
+  display: none;
+}
+
+/* --- TAMBAHAN PENTING: LAYOUT DESKTOP UNTUK CARD --- */
+.card-inner {
+  display: flex; /* Aktifkan Flexbox agar gambar dan teks bersandingan */
+  align-items: center; /* Sejajarkan secara vertikal */
+  gap: 30px; /* Beri jarak antara gambar dan teks */
+  flex-direction: row; /* Desktop berjejer ke samping */
+}
+
+.card-image img {
+  width: 250px; /* Atur lebar gambar di Desktop secara spesifik! */
+  height: auto; /* Jaga proporsi tinggi */
+  border-radius: 20px; /* Sudut gambar membulat */
+  box-shadow: 10px 10px 0px #58a6ff; /* Efek shadow Gojo */
+  display: block; /* Hindari whitespace aneh */
+}
+
+.card-text {
+  flex: 1; /* Biar teks mengisi sisa ruang */
+  text-align: left; /* Teks rata kiri di Desktop */
+}
+
+.birthday-card h1 {
+  font-family: "Anton", sans-serif;
+  font-size: 2.5rem;
+  color: #1a1a1a; /* GANTI JADI HITAM AGAR KONTRAST! */
+  line-height: 1;
+}
+
+.birthday-card h1 span {
+  color: #0088ff; /* Warna Charlize */
+  font-size: 3.5rem;
+}
+
+.p-limit {
+  font-style: italic;
+  color: #c9d1d9;
+}
+
+.message-box {
+  margin: 20px 0;
+  color: #444; /* Teks pesan abu-abu gelap */
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.limitless-btn {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+
+  background: #0088ff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: transform 0.3s;
+}
+
+.limitless-btn:hover {
+  box-shadow: 0 0 30px rgba(88, 166, 255, 1);
+  transform: scale(1.1);
+  background: #005bb5;
+}
+
+/* Responsif Mobile (Tetap pertahankan ini DI BAWAH gaya dasar) */
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 650px) {
+  /* Skala kubus diperkecil sedikit agar tidak terlalu penuh di layar HP */
+  #cube-container {
+    transform: scale(0.75);
+  }
+
+  /* Geser posisi awal bola agar tidak terlalu mepet ke tengah di layar sempit */
+  #blue-orb {
+    right: 10%;
+  }
+  #red-orb {
+    left: 10%;
+  }
+
+  .birthday-card {
+    width: 92%;
+    padding: 20px 15px;
+    max-height: 90vh; /* Ruang lebih lega */
+  }
+
+  .card-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px; /* PENTING: Timpa gap 30px dari versi desktop */
+  }
+
+  .card-image img {
+    width: 130px; /* Gambar diperkecil untuk HP */
+    margin: 0 auto;
+    box-shadow: 6px 6px 0px #58a6ff; /* Shadow disesuaikan */
+  }
+
+  .birthday-card h1 {
+    font-size: 1.6rem;
+    margin-top: 5px;
+  }
+
+  .birthday-card h1 span {
+    font-size: 2.1rem;
+  }
+
+  .message-box {
+    font-size: 0.95rem;
+    margin: 15px 0;
+    padding: 0 5px;
+    line-height: 1.4;
+  }
+
+  .limitless-btn {
+    font-size: 15px;
+    padding: 12px 20px;
+    width: 90%; /* Tombol lebih lebar memanjang di HP */
+  }
+}
+
+/* Sembunyikan scrollbar di kartu jika teks kepanjangan, tapi tetap bisa discroll */
+.birthday-card::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+/* --- ANIMASI HOLLOW PURPLE --- */
+#hollow-purple-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* --- PERBAIKAN POSISI AWAL BOLA BOS --- */
+#blue-orb {
+  width: 80px;
+  height: 80px;
+  background: #0088ff;
+  box-shadow:
+    0 0 40px #0088ff,
+    0 0 80px #0088ff;
+  right: 20%; /* Mulai dari KANAN */
+}
+
+#red-orb {
+  width: 80px;
+  height: 80px;
+  background: #ff0000;
+  box-shadow:
+    0 0 40px #ff0000,
+    0 0 80px #ff0000;
+  left: 20%; /* Mulai dari KIRI */
+}
+
+#purple-orb {
+  width: 120px;
+  height: 120px;
+  background: #8a2be2;
+  box-shadow:
+    0 0 80px #8a2be2,
+    0 0 150px #8a2be2,
+    inset 0 0 40px #fff;
+  z-index: 51;
+}
+
+#flash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  opacity: 0;
+  z-index: 99;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* --- TAMBAHAN BARU BOS: CSS UNTUK TANGAN & VIGNETTE DINAMIS --- */
+#hand-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* JANGAN LUPA TARUH FILE hand.jpg DI FOLDER YANG SAMA BOS */
+  background-image: url("hand-hd.jpeg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0; /* Sembunyi dulu */
+  z-index: 40; /* Di belakang bola (50), di depan void (1) */
+  pointer-events: none;
+  transition: opacity 1s ease; /* Muncul pelan-pelan */
+}
+
+#vignette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent; /* UBAH JADI TRANSPARENT BRO! */
+  opacity: 0; /* Sembunyi dulu */
+  z-index: 41; /* Di depan gambar tangan */
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 1s ease; /* Muncul pelan-pelan */
+}
+
+/* Pseudo-element untuk membuat lubang Vignette yang bisa melebar */
+#vignette-overlay::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Ukuran raksasa untuk menutupi layar */
+  width: 250vw;
+  height: 250vw;
+  border-radius: 50%;
+  /* Gradasi: Tengah transparan, pinggir hitam pekat */
+  background: radial-gradient(
+    circle,
+    transparent 10%,
+    rgba(0, 0, 0, 0.9) 30%,
+    black 100%
+  );
+
+  /* PENTING: Mulai dari skala 0 (artinya lubang transparan super kecil = layar full hitam) */
+  transform: translate(-50%, -50%) scale(0);
+
+  /* Animasi pelebaran Vignette */
+  transition: transform 2s ease-out;
+  will-change: transform;
+}
+
+/* Class ini akan ditambahkan lewat JS untuk melebarkan Vignette */
+#vignette-overlay.expand::after {
+  /* Skala 1: Lubang transparan membesar, menyisakan vignette di sudut */
+  transform: translate(-50%, -50%) scale(1);
+}
