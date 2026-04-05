@@ -181,3 +181,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 18000);
   });
 });
+
+// --- Tambahkan ini di bagian paling bawah script.js mu ---
+const limitlessBtn = document.querySelector(".limitless-btn");
+
+limitlessBtn.addEventListener("click", () => {
+  // Membuka link Instagram di tab baru
+  window.open(
+    "https://www.instagram.com/klippyi.all?igsh=MjN3OWo4MDRic3Yz",
+    "_blank",
+  );
+});
