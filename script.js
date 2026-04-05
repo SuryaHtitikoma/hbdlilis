@@ -16,12 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- 1. GENERATE SISI KUBUS ---
   const cubeData = [
-    { class: "front", img: "g1.png" },
-    { class: "back", img: "g2.png" },
-    { class: "top", img: "g3.png" },
-    { class: "bottom", img: "g4.png" },
-    { class: "right", img: "g5.png" },
-    { class: "left", img: "g6.png" },
+    { class: "front", img: "g1.webp" },
+    { class: "back", img: "g2.webp" },
+    { class: "top", img: "g3.webp" },
+    { class: "bottom", img: "g4.webp" },
+    { class: "right", img: "g5.webp" },
+    { class: "left", img: "g6.webp" },
   ];
 
   cubeData.forEach((side) => {
