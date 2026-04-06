@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Jalankan fungsi ganti gambar setiap 3 detik (3000ms)
-        setInterval(changeGojoImage, 2000); // Beri jeda total 3.5s agar efek pudarnya terasa
+        setInterval(changeGojoImage, 3500); // Beri jeda total 3.5s agar efek pudarnya terasa
 
         // MULAI MUSIK BARU DI SINI
         bgMusic.play().catch((error) => {
