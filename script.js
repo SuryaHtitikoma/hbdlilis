@@ -14,6 +14,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const bgMusic = new Audio("dh.mp3"); // Musik Ulang Tahun (Setelah Card muncul)
   bgMusic.loop = true; // Set looping untuk musik latar
 
+  // --- LOGIKA LOADING SCREEN ---
+  const loadingScreen = document.getElementById("loading-screen");
+  const loadingText = document.getElementById("loading-text");
+
+  // Ubah teks setelah 5 detik agar tidak membosankan
+  setTimeout(() => {
+    loadingText.innerText = "Hampir siap...";
+  }, 5000);
+
+  // Hilangkan loading screen setelah 10 detik (10000ms)
+  setTimeout(() => {
+    loadingScreen.classList.add("fade-out");
+
+    // Opsional: Hapus elemen dari DOM setelah animasi fade selesai agar ringan
+    setTimeout(() => {
+      loadingScreen.style.display = "none";
+    }, 1500);
+  }, 10000);
+
   // --- 1. GENERATE SISI KUBUS ---
   const cubeData = [
     { class: "front", img: "g1.webp" },
@@ -45,44 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(autoRotate);
   }
   autoRotate();
-
-  // // --- 3. ROTASI MOUSE ---
-  // document.addEventListener("mousemove", (e) => {
-  //   if (animationTriggered) return;
-
-  //   isMouseMoving = true;
-  //   clearTimeout(mouseTimeout);
-
-  //   const dx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-  //   const dy = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
-
-  //   const rotateY = dx * 180;
-  //   const rotateX = -dy * 180;
-
-  //   if (container.style.display !== "none") {
-  //     cube.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  //     idleRotationX = rotateX;
-  //     idleRotationY = rotateY;
-  //   }
-
-  //   mouseTimeout = setTimeout(() => {
-  //     isMouseMoving = false;
-  //   }, 200);
-  //   // Event untuk PC (Mouse)
-  //   document.addEventListener("mousemove", (e) => {
-  //     handleRotation(e.clientX, e.clientY);
-  //   });
-
-  //   // Event untuk HP (Touch)
-  //   document.addEventListener(
-  //     "touchmove",
-  //     (e) => {
-  //       // Ambil koordinat dari sentuhan jari pertama
-  //       handleRotation(e.touches[0].clientX, e.touches[0].clientY);
-  //     },
-  //     { passive: true },
-  //   );
-  // });
 
   // --- 3. ROTASI MOUSE & TOUCH (MOBILE) ---
   function handleRotation(clientX, clientY) {
