@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // --- TAMBAHAN BARU BOS: ANIMASI GONTA-GANTI GAMBAR GOJO ---
         const gojoCardImg = document.querySelector(".card-image img"); // Ambil elemen gambar Gojo
         const gojoImages = [
-          "gojo1.jpg",
+          "gojo1.webp",
           "gojo2.jpg",
           "gojo3.jpg",
           "gojo4.jpg",
