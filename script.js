@@ -209,6 +209,36 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         card.classList.add("visible");
 
+        // --- TAMBAHAN BARU BOS: ANIMASI GONTA-GANTI GAMBAR GOJO ---
+        const gojoCardImg = document.querySelector(".card-image img"); // Ambil elemen gambar Gojo
+        const gojoImages = [
+          "gojo1.jpg",
+          "gojo2.jpg",
+          "gojo3.jpg",
+          "gojo4.jpg",
+          "gojo5.jpg",
+        ]; // Daftar file gambar kamu
+        let currentGojoIndex = 0;
+
+        // Fungsi untuk mengganti gambar dengan efek pudar
+        function changeGojoImage() {
+          // Pertama, buat gambar pudar dulu (opacity 0)
+          gojoCardImg.style.transition = "opacity 0.5s ease";
+          gojoCardImg.style.opacity = "0";
+
+          // Tunggu sebentar (0.5s) sampai benar-benar pudar
+          setTimeout(() => {
+            currentGojoIndex = (currentGojoIndex + 1) % gojoImages.length; // Hitung index gambar berikutnya
+            gojoCardImg.src = gojoImages[currentGojoIndex]; // Ganti sumber gambar
+
+            // Setelah gambar diganti, buat gambar muncul kembali (opacity 1)
+            gojoCardImg.style.opacity = "1";
+          }, 500); // 500ms = 0.5s
+        }
+
+        // Jalankan fungsi ganti gambar setiap 3 detik (3000ms)
+        setInterval(changeGojoImage, 2000); // Beri jeda total 3.5s agar efek pudarnya terasa
+
         // MULAI MUSIK BARU DI SINI
         bgMusic.play().catch((error) => {
           console.log(
